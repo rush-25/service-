@@ -40,8 +40,8 @@ const Contact = () => {
                     <MapPin className="h-5 w-5" />
                   </div>
                   <div>
-                    <h5 className="font-bold text-gray-900 text-sm">Beverly Hills Showroom</h5>
-                    <p className="text-xs text-gray-400 mt-0.5">9850 Wilshire Blvd, Beverly Hills, CA 90210</p>
+                    <h5 className="font-bold text-gray-900 text-sm">Indika Motors</h5>
+                    <p className="text-xs text-gray-400 mt-0.5">Colombo Rd, Maikkulama, Chilaw</p>
                   </div>
                 </div>
 
@@ -51,7 +51,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h5 className="font-bold text-gray-900 text-sm">Direct Phone</h5>
-                    <p className="text-xs text-gray-400 mt-0.5">+1 555-0199 (Mon-Fri 24H)</p>
+                    <p className="text-xs text-gray-400 mt-0.5">077-3511935, 077-8119501</p>
                   </div>
                 </div>
 
@@ -61,7 +61,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h5 className="font-bold text-gray-900 text-sm">Email Support</h5>
-                    <p className="text-xs text-gray-400 mt-0.5">support@driveeasy.com</p>
+                    <p className="text-xs text-gray-400 mt-0.5">indikamotoschilaw@gmail.com</p>
                   </div>
                 </div>
 
@@ -84,8 +84,8 @@ const Contact = () => {
               <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=800&q=50')] bg-cover opacity-20 mix-blend-overlay"></div>
               <div className="relative z-10 space-y-4">
                 <span className="text-[10px] font-bold text-blue-400 uppercase tracking-widest">Active Hub Location</span>
-                <h4 className="text-base font-bold">Beverly Hills GPS Grid Map</h4>
-                <p className="text-xs text-gray-400">Our physical pickup lounge is positioned perfectly on Wilshire Blvd, offering VIP refreshments and 24/7 keyless pick lockers.</p>
+                <h4 className="text-base font-bold">Chilaw GPS Grid Map</h4>
+                <p className="text-xs text-gray-400">Our physical pickup lounge is positioned perfectly on Colombo Rd, offering VIP refreshments and 24/7 keyless pick lockers.</p>
                 <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 rounded-lg text-xs font-semibold">
                   <span>Showroom open now</span>
                 </div>
