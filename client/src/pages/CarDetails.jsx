@@ -322,7 +322,7 @@ const CarDetails = () => {
                   <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Premium {car.category} Listing</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-black text-blue-600">${car.dailyPrice}</p>
+                  <p className="text-2xl font-black text-blue-600">LKR {car.dailyPrice}</p>
                   <p className="text-[10px] font-bold text-gray-400 uppercase">Per Day Rate</p>
                 </div>
               </div>
@@ -426,7 +426,7 @@ const CarDetails = () => {
                   <div className="bg-gray-50 border border-gray-100 rounded-2xl p-4 space-y-2 text-xs">
                     <div className="flex justify-between font-bold">
                       <span>Daily Base Price:</span>
-                      <span>${car.dailyPrice} x {calcDays} days</span>
+                      <span>LKR {car.dailyPrice} x {calcDays} days</span>
                     </div>
                     {calcDays >= 30 ? (
                       <p className="text-green-600 font-semibold">🔥 Applied premium monthly discount!</p>
@@ -436,7 +436,7 @@ const CarDetails = () => {
                     <hr className="border-gray-200" />
                     <div className="flex justify-between text-base font-black text-gray-900">
                       <span>Estimated Total:</span>
-                      <span>${calcTotal.toFixed(2)}</span>
+                      <span>LKR {calcTotal.toFixed(2)}</span>
                     </div>
                   </div>
                 )}

@@ -35,13 +35,13 @@ const CustomerPayments = () => {
 ========================================
              DRIVEEASY INVOICE
 ========================================
-Receipt ID: ${pay.paymentIntentId}
-Customer Name: ${pay.user?.name || 'Customer'}
-Customer Email: ${pay.user?.email || ''}
-Amount Charged: $${pay.amount.toFixed(2)}
-Payment Gateway: ${pay.paymentMethod}
-Transaction Status: ${pay.status}
-Payment Date: ${new Date(pay.createdAt).toLocaleString()}
+Receipt ID: LKR {pay.paymentIntentId}
+Customer Name: LKR {pay.user?.name || 'Customer'}
+Customer Email: LKR {pay.user?.email || ''}
+Amount Charged: LKR ${pay.amount.toFixed(2)}
+Payment Gateway: LKR {pay.paymentMethod}
+Transaction Status: LKR {pay.status}
+Payment Date: LKR {new Date(pay.createdAt).toLocaleString()}
 ----------------------------------------
 Thank you for choosing DriveEasy!
 Safe travels.
@@ -98,7 +98,7 @@ Safe travels.
                   <tr key={p._id} className="hover:bg-gray-50/50">
                     <td className="px-6 py-4 font-mono font-bold text-gray-900">{p.paymentIntentId}</td>
                     <td className="px-6 py-4 text-gray-700">{p.paymentMethod}</td>
-                    <td className="px-6 py-4 text-blue-600 font-extrabold">${p.amount.toFixed(2)}</td>
+                    <td className="px-6 py-4 text-blue-600 font-extrabold">LKR {p.amount.toFixed(2)}</td>
                     <td className="px-6 py-4 text-gray-500">{new Date(p.createdAt).toLocaleDateString()}</td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold ${

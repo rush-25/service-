@@ -111,7 +111,7 @@ const CustomerOverview = () => {
         <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total Spent</span>
-            <p className="text-2xl font-black text-blue-600">${stats.totalSpent.toFixed(2)}</p>
+            <p className="text-2xl font-black text-blue-600">LKR {stats.totalSpent.toFixed(2)}</p>
           </div>
           <div className="p-3 bg-blue-50 text-blue-600 rounded-xl">
             <CreditCard className="h-5 w-5" />
@@ -153,7 +153,7 @@ const CustomerOverview = () => {
                     <td className="px-6 py-4">
                       <p className="text-gray-700">{new Date(b.pickupDate).toLocaleDateString()} to {new Date(b.returnDate).toLocaleDateString()}</p>
                     </td>
-                    <td className="px-6 py-4 text-gray-900 font-bold">${b.totalPrice.toFixed(2)}</td>
+                    <td className="px-6 py-4 text-gray-900 font-bold">LKR {b.totalPrice.toFixed(2)}</td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold ${
                         b.status === 'Completed' ? 'bg-green-50 text-green-700' :
@@ -187,7 +187,7 @@ const CustomerOverview = () => {
               <img src={car.images[0]} className="w-24 h-16 object-cover rounded-lg bg-gray-50 shrink-0" />
               <div className="flex-grow">
                 <h5 className="font-bold text-gray-900 text-xs">{car.brand} {car.model}</h5>
-                <p className="text-[10px] text-gray-400">{car.category} • ${car.dailyPrice}/Day</p>
+                <p className="text-[10px] text-gray-400">{car.category} • LKR {car.dailyPrice}/Day</p>
                 <Link to={`/cars/${car._id}`} className="text-[10px] font-bold text-blue-600 hover:underline mt-2 block">
                   Details & Book →
                 </Link>

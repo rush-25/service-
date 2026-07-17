@@ -78,7 +78,7 @@ const CustomerBookings = () => {
                 <div className="space-y-1">
                   <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{b.car?.brand}</span>
                   <h3 className="text-lg font-bold text-gray-950">{b.car?.model}</h3>
-                  <p className="text-xs text-blue-600 font-extrabold">${b.totalPrice.toFixed(2)}</p>
+                  <p className="text-xs text-blue-600 font-extrabold">LKR {b.totalPrice.toFixed(2)}</p>
                 </div>
               </div>
 
