@@ -230,6 +230,14 @@ const AdminVehicles = () => {
                 <option value="4">4 Seats</option>
                 <option value="5">5 Seats</option>
                 <option value="7">7 Seats</option>
+                <option value="8">8 Seats</option>
+                <option value="9">9 Seats</option>
+                <option value="10">10 Seats</option>
+                <option value="12">12 Seats</option>
+                <option value="14">14 Seats</option>
+                <option value="15">15 Seats</option>
+                <option value="16">16 Seats</option>
+                <option value="18">18 Seats</option>
               </select>
             </div>
             <div>
@@ -302,6 +310,7 @@ const AdminVehicles = () => {
                 <option value="SUV">SUV</option>
                 <option value="Sedan">Sedan</option>
                 <option value="Sports">Sports</option>
+                <option value="Van">Van</option>
               </select>
             </div>
           </div>

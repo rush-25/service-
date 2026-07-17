@@ -61,7 +61,7 @@ const carSchema = new mongoose.Schema({
   category: {
     type: String,
     required: [true, 'Please provide a category'],
-    enum: ['Luxury', 'SUV', 'Sedan', 'Sports', 'Electric'],
+    enum: ['Luxury', 'SUV', 'Sedan', 'Sports', 'Electric', 'Van'],
   },
   rating: {
     type: Number,
