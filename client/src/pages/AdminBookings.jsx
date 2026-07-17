@@ -143,7 +143,7 @@ const AdminBookings = () => {
                     <td className="px-6 py-4">
                       <p className="text-gray-300">{new Date(b.pickupDate).toLocaleDateString()} to {new Date(b.returnDate).toLocaleDateString()}</p>
                     </td>
-                    <td className="px-6 py-4 text-blue-400 font-bold">${b.totalPrice.toFixed(2)}</td>
+                    <td className="px-6 py-4 text-blue-400 font-bold">LKR {b.totalPrice.toFixed(2)}</td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold ${
                         b.status === 'Completed' ? 'bg-green-500/10 text-green-400' :

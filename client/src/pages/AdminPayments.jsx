@@ -48,14 +48,14 @@ const AdminPayments = () => {
 ========================================
          DRIVEEASY TRANSACTION RECEIPT
 ========================================
-Transaction ID: ${pay.paymentIntentId}
-Customer Name: ${pay.user?.name || 'Customer'}
-Customer Email: ${pay.user?.email || ''}
-Customer Phone: ${pay.user?.phone || ''}
-Grand Total Charged: $${pay.amount.toFixed(2)}
-Payment Gateway: ${pay.paymentMethod}
-Receipt Date: ${new Date(pay.createdAt).toLocaleString()}
-Transaction Status: ${pay.status}
+Transaction ID: LKR {pay.paymentIntentId}
+Customer Name: LKR {pay.user?.name || 'Customer'}
+Customer Email: LKR {pay.user?.email || ''}
+Customer Phone: LKR {pay.user?.phone || ''}
+Grand Total Charged: LKR ${pay.amount.toFixed(2)}
+Payment Gateway: LKR {pay.paymentMethod}
+Receipt Date: LKR {new Date(pay.createdAt).toLocaleString()}
+Transaction Status: LKR {pay.status}
 ----------------------------------------
 Verified secure checkout database receipt.
 DriveEasy Car Rental Management Inc.
@@ -113,7 +113,7 @@ DriveEasy Car Rental Management Inc.
                       <p className="text-[10px] text-gray-400 font-normal">{p.user?.email}</p>
                     </td>
                     <td className="px-6 py-4 text-gray-300">{p.paymentMethod}</td>
-                    <td className="px-6 py-4 text-blue-400 font-extrabold">${p.amount.toFixed(2)}</td>
+                    <td className="px-6 py-4 text-blue-400 font-extrabold">LKR {p.amount.toFixed(2)}</td>
                     <td className="px-6 py-4 text-gray-500">{new Date(p.createdAt).toLocaleDateString()}</td>
                     <td className="px-6 py-4">
                       <span className={`inline-flex px-2.5 py-1 rounded-full text-[10px] font-bold ${

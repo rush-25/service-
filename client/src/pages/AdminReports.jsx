@@ -39,7 +39,7 @@ const AdminReports = () => {
       ['Total Fleet Vehicles', cards.totalCars],
       ['Total Active Customers', cards.totalCustomers],
       ['Total Placed Bookings', cards.totalBookings],
-      ['Aggregated Sales Revenue ($)', cards.revenue],
+      ['Aggregated Sales Revenue (LKR)', cards.revenue],
       ['Active Ongoing Rentals', cards.activeRentals],
     ]
       .map((row) => row.join(','))
@@ -103,7 +103,7 @@ const AdminReports = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
           <div className="bg-slate-950 p-6 rounded-2xl border border-slate-900">
             <span className="text-[10px] font-bold text-gray-400 uppercase">Gross Revenue</span>
-            <p className="text-2xl font-black text-blue-500 mt-1">${(cards?.revenue || 0).toFixed(2)}</p>
+            <p className="text-2xl font-black text-blue-500 mt-1">LKR {(cards?.revenue || 0).toFixed(2)}</p>
           </div>
           <div className="bg-slate-950 p-6 rounded-2xl border border-slate-900">
             <span className="text-[10px] font-bold text-gray-400 uppercase">Customer Fleet Activity</span>

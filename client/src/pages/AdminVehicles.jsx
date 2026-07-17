@@ -268,7 +268,7 @@ const AdminVehicles = () => {
 
           <div className="grid grid-cols-1 sm:grid-cols-4 gap-6">
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Daily Price ($)</label>
+              <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Daily Price (LKR)</label>
               <input
                 type="number"
                 value={dailyPrice}
@@ -279,7 +279,7 @@ const AdminVehicles = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Weekly Price ($)</label>
+              <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Weekly Price (LKR)</label>
               <input
                 type="number"
                 value={weeklyPrice}
@@ -289,7 +289,7 @@ const AdminVehicles = () => {
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Monthly Price ($)</label>
+              <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Monthly Price (LKR)</label>
               <input
                 type="number"
                 value={monthlyPrice}
@@ -372,8 +372,8 @@ const AdminVehicles = () => {
               </div>
 
               <div className="flex justify-between items-center text-xs text-gray-400">
-                <span>Daily budget: <span className="text-white font-bold">${c.dailyPrice}</span></span>
-                <span>Weekly: <span className="text-white font-bold">${c.weeklyPrice}</span></span>
+                <span>Daily budget: <span className="text-white font-bold">LKR {c.dailyPrice}</span></span>
+                <span>Weekly: <span className="text-white font-bold">LKR {c.weeklyPrice}</span></span>
               </div>
 
               <div className="flex gap-2 pt-2 mt-auto border-t border-slate-800">

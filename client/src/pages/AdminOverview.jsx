@@ -96,10 +96,10 @@ const AdminOverview = () => {
         <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl flex items-center justify-between">
           <div className="space-y-1">
             <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total Revenue</span>
-            <p className="text-2xl font-black text-blue-400">${cards.revenue.toFixed(2)}</p>
+            <p className="text-2xl font-black text-blue-400">LKR {cards.revenue.toFixed(2)}</p>
           </div>
           <div className="p-3 bg-blue-500/10 text-blue-400 rounded-xl">
-            <DollarSign className="h-5 w-5" />
+            <span className="font-bold text-lg">LKR</span>
           </div>
         </div>
 
@@ -120,7 +120,7 @@ const AdminOverview = () => {
 
         {/* Revenue Overview Line Chart */}
         <div className="bg-slate-900/30 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-          <h3 className="text-sm font-bold text-white uppercase tracking-wider">Revenue Overview ($)</h3>
+          <h3 className="text-sm font-bold text-white uppercase tracking-wider">Revenue Overview (LKR)</h3>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={charts.revenueOverview}>
