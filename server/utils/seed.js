@@ -21,10 +21,8 @@ const seedData = async () => {
 
     // Seed Locations
     const locations = await Location.create([
-      { name: 'Los Angeles Int Airport (LAX)', address: '1 World Way, Los Angeles, CA 90045' },
-      { name: 'Beverly Hills Showroom', address: '9850 Wilshire Blvd, Beverly Hills, CA 90210' },
-      { name: 'San Francisco Downtown', address: '325 Mason St, San Francisco, CA 94102' },
-      { name: 'Las Vegas Strip', address: '3131 S Las Vegas Blvd, Las Vegas, NV 89109' },
+      { name: 'Chilaw', address: 'Colombo Rd, Maikkulama, Chilaw' },
+      { name: 'Waikkal', address: 'Waikkal' },
     ]);
     console.log('Locations seeded!');
 
@@ -243,8 +241,8 @@ const seedData = async () => {
     const booking3 = await Booking.create({
       user: customer1._id,
       car: cars[2]._id, // Porsche
-      pickupLocation: locations[2].name,
-      returnLocation: locations[2].name,
+      pickupLocation: locations[0].name,
+      returnLocation: locations[1].name,
       pickupDate: new Date(d.getFullYear(), d.getMonth(), d.getDate() + 2),
       returnDate: new Date(d.getFullYear(), d.getMonth(), d.getDate() + 5),
       totalPrice: 750,

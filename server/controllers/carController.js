@@ -101,12 +101,21 @@ exports.updateCar = async (req, res) => {
       return res.status(404).json({ success: false, message: 'Car not found' });
     }
 
-    let images = car.images;
+    let images = [];
+    // Keep explicitly-passed existing image URLs
+    if (req.body.existingImages) {
+      images = Array.isArray(req.body.existingImages)
+        ? req.body.existingImages
+        : [req.body.existingImages];
+    }
+    // Append any newly uploaded files
     if (req.files && req.files.length > 0) {
       const newImages = req.files.map(file => `/uploads/${file.filename}`);
       images = [...images, ...newImages];
-    } else if (req.body.images) {
-      images = Array.isArray(req.body.images) ? req.body.images : [req.body.images];
+    }
+    // Fallback: keep original images if nothing was provided
+    if (images.length === 0) {
+      images = car.images;
     }
 
     const updatedData = { ...req.body, images };

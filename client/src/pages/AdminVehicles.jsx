@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import api from '../services/api';
 import Toast from '../components/Toast';
-import { Plus, Edit, Trash2, ShieldAlert, Check, RefreshCw } from 'lucide-react';
+import { Plus, Edit, Trash2, Upload, X, Image as ImageIcon } from 'lucide-react';
 
 const AdminVehicles = () => {
   const [cars, setCars] = useState([]);
@@ -25,7 +25,10 @@ const AdminVehicles = () => {
   const [monthlyPrice, setMonthlyPrice] = useState('');
   const [category, setCategory] = useState('Electric');
   const [description, setDescription] = useState('');
-  const [images, setImages] = useState('');
+  const [imageFiles, setImageFiles] = useState([]);   // new File objects
+  const [imagePreviews, setImagePreviews] = useState([]); // data-URL previews
+  const [existingImages, setExistingImages] = useState([]); // server URLs when editing
+  const fileInputRef = useRef(null);
 
   const showToast = (message, type = 'success') => {
     setToast({ message, type });
@@ -63,7 +66,9 @@ const AdminVehicles = () => {
     setMonthlyPrice('');
     setCategory('Electric');
     setDescription('');
-    setImages('');
+    setImageFiles([]);
+    setImagePreviews([]);
+    setExistingImages([]);
     setShowForm(true);
   };
 
@@ -81,7 +86,9 @@ const AdminVehicles = () => {
     setMonthlyPrice(car.monthlyPrice.toString());
     setCategory(car.category);
     setDescription(car.description);
-    setImages(car.images.join(', '));
+    setImageFiles([]);
+    setImagePreviews([]);
+    setExistingImages(car.images || []);
     setShowForm(true);
   };
 
@@ -99,39 +106,66 @@ const AdminVehicles = () => {
     }
   };
 
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    if (!files.length) return;
+    setImageFiles(prev => [...prev, ...files]);
+    files.forEach(file => {
+      const reader = new FileReader();
+      reader.onload = (ev) => setImagePreviews(prev => [...prev, ev.target.result]);
+      reader.readAsDataURL(file);
+    });
+    // reset input so same file can be re-selected if removed
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const removeNewImage = (index) => {
+    setImageFiles(prev => prev.filter((_, i) => i !== index));
+    setImagePreviews(prev => prev.filter((_, i) => i !== index));
+  };
+
+  const removeExistingImage = (index) => {
+    setExistingImages(prev => prev.filter((_, i) => i !== index));
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Process image text split
-    const imageList = images.split(',').map(s => s.trim()).filter(Boolean);
+    const formData = new FormData();
+    formData.append('brand', brand);
+    formData.append('model', model);
+    formData.append('year', parseInt(year));
+    formData.append('color', color);
+    formData.append('seats', parseInt(seats));
+    formData.append('fuelType', fuelType);
+    formData.append('transmission', transmission);
+    formData.append('dailyPrice', parseFloat(dailyPrice));
+    formData.append('weeklyPrice', parseFloat(weeklyPrice || dailyPrice));
+    formData.append('monthlyPrice', parseFloat(monthlyPrice || dailyPrice));
+    formData.append('category', category);
+    formData.append('description', description);
 
-    const carData = {
-      brand,
-      model,
-      year: parseInt(year),
-      color,
-      seats: parseInt(seats),
-      fuelType,
-      transmission,
-      dailyPrice: parseFloat(dailyPrice),
-      weeklyPrice: parseFloat(weeklyPrice || dailyPrice),
-      monthlyPrice: parseFloat(monthlyPrice || dailyPrice),
-      category,
-      description,
-      images: imageList.length > 0 ? imageList : ['https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1200&q=80'],
-    };
+    // Append new file uploads
+    imageFiles.forEach(file => formData.append('images', file));
+
+    // When editing, pass existing URLs so the server keeps them
+    if (editId && existingImages.length > 0) {
+      existingImages.forEach(url => formData.append('existingImages', url));
+    }
 
     try {
       if (editId) {
-        // Edit Action
-        const res = await api.put(`/cars/${editId}`, carData);
+        const res = await api.put(`/cars/${editId}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
         if (res.data.success) {
           showToast('Vehicle updated successfully!');
           fetchCars();
         }
       } else {
-        // Create Action
-        const res = await api.post('/cars', carData);
+        const res = await api.post('/cars', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
         if (res.data.success) {
           showToast('New premium vehicle created successfully!');
           fetchCars();
@@ -315,14 +349,69 @@ const AdminVehicles = () => {
             </div>
           </div>
 
+          {/* Image Upload Section */}
           <div>
-            <label className="block text-xs font-bold text-gray-400 uppercase mb-2">Multiple Image URLs (comma separated)</label>
+            <label className="block text-xs font-bold text-gray-400 uppercase mb-3">Vehicle Images (JPG / PNG)</label>
+
+            {/* Existing images (edit mode) */}
+            {existingImages.length > 0 && (
+              <div className="mb-3">
+                <p className="text-[10px] text-gray-500 uppercase font-bold mb-2">Current Images</p>
+                <div className="flex flex-wrap gap-3">
+                  {existingImages.map((url, i) => (
+                    <div key={i} className="relative group w-24 h-16 rounded-lg overflow-hidden border border-slate-700">
+                      <img src={url} alt="" className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => removeExistingImage(i)}
+                        className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer"
+                      >
+                        <X className="h-4 w-4 text-white" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* New image previews */}
+            {imagePreviews.length > 0 && (
+              <div className="mb-3">
+                <p className="text-[10px] text-gray-500 uppercase font-bold mb-2">New Images</p>
+                <div className="flex flex-wrap gap-3">
+                  {imagePreviews.map((src, i) => (
+                    <div key={i} className="relative group w-24 h-16 rounded-lg overflow-hidden border border-blue-700/50">
+                      <img src={src} alt="" className="w-full h-full object-cover" />
+                      <button
+                        type="button"
+                        onClick={() => removeNewImage(i)}
+                        className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity cursor-pointer"
+                      >
+                        <X className="h-4 w-4 text-white" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Drop zone / pick button */}
+            <button
+              type="button"
+              onClick={() => fileInputRef.current?.click()}
+              className="w-full h-24 border-2 border-dashed border-slate-700 hover:border-blue-500 rounded-xl flex flex-col items-center justify-center gap-2 text-gray-500 hover:text-blue-400 transition-colors cursor-pointer bg-slate-950/60"
+            >
+              <Upload className="h-6 w-6" />
+              <span className="text-xs font-semibold">Click to upload images</span>
+              <span className="text-[10px] text-gray-600">JPG, PNG supported · Multiple files allowed</span>
+            </button>
             <input
-              type="text"
-              value={images}
-              onChange={(e) => setImages(e.target.value)}
-              placeholder="e.g. https://unsplash.com/car1.jpg, https://unsplash.com/car2.jpg"
-              className="w-full px-4 h-11 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpeg,image/jpg,image/png"
+              multiple
+              onChange={handleFileChange}
+              className="hidden"
             />
           </div>
 
