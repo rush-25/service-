@@ -213,7 +213,7 @@ const Cars = () => {
 
             {/* Price Range */}
             <div>
-              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Daily Budget ($)</label>
+              <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Daily Budget (LKR)</label>
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="number"

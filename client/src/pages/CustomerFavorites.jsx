@@ -87,7 +87,7 @@ const CustomerFavorites = () => {
 
                   <div className="flex justify-between items-center pt-2 mt-auto border-t border-gray-100">
                     <div>
-                      <span className="text-lg font-black text-blue-600">${car.dailyPrice}</span>
+                      <span className="text-lg font-black text-blue-600">LKR {car.dailyPrice}</span>
                       <span className="text-[10px] text-gray-400 font-semibold">/Day</span>
                     </div>
                     <div className="flex gap-2">

@@ -68,7 +68,7 @@ const CarCard = ({ car, isWishlisted, onWishlistToggle, showNotification }) => {
         {/* Price & Actions */}
         <div className="flex justify-between items-center mt-auto pt-2">
           <div>
-            <span className="text-2xl font-extrabold text-blue-600">${car.dailyPrice}</span>
+            <span className="text-2xl font-extrabold text-blue-600">LKR {car.dailyPrice}</span>
             <span className="text-xs font-semibold text-gray-400"> / Day</span>
           </div>
 
