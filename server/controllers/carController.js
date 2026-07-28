@@ -121,7 +121,7 @@ exports.updateCar = async (req, res) => {
     const updatedData = { ...req.body, images };
     car = await Car.findByIdAndUpdate(req.params.id, updatedData, {
       new: true,
-      runValidators: true,
+      runValidators: false,
     });
 
     res.status(200).json({ success: true, data: car });
