@@ -339,12 +339,17 @@ const AdminVehicles = () => {
                 onChange={(e) => setCategory(e.target.value)}
                 className="w-full h-11 bg-slate-950 border border-slate-800 rounded-xl text-xs text-white focus:outline-none focus:border-blue-500"
               >
-                <option value="Electric">Electric</option>
-                <option value="Luxury">Luxury</option>
-                <option value="SUV">SUV</option>
                 <option value="Sedan">Sedan</option>
-                <option value="Sports">Sports</option>
+                <option value="Station Wagon">Station Wagon</option>
+                <option value="Hatchback">Hatchback</option>
+                <option value="SUV">SUV</option>
+                <option value="Crossover">Crossover</option>
+                <option value="Pickup Truck">Pickup Truck</option>
+                <option value="Minivan (MPV)">Minivan (MPV)</option>
                 <option value="Van">Van</option>
+                <option value="Fastback">Fastback</option>
+                <option value="Liftback">Liftback</option>
+                <option value="Kei Car">Kei Car</option>
               </select>
             </div>
           </div>
