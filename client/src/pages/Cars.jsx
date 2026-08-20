@@ -1,9 +1,28 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useLocation } from 'react-router-dom';
 import api from '../services/api';
 import CarCard from '../components/CarCard';
 import Toast from '../components/Toast';
 import { SlidersHorizontal, Search, RotateCcw, ArrowUpDown, Fuel, ShieldAlert } from 'lucide-react';
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1 }
+  }
+};
+
+const slideUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.4 } }
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: -20 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.5 } }
+};
 
 const Cars = () => {
   const location = useLocation();
@@ -148,7 +167,10 @@ const Cars = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
 
           {/* Left Columns: Dynamic Filter Sidebar */}
-          <div className="lg:col-span-1 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm h-fit space-y-6 text-left">
+          <motion.div 
+            initial="hidden" animate="visible" variants={slideRight}
+            className="lg:col-span-1 bg-white p-6 rounded-2xl border border-gray-100 shadow-sm h-fit space-y-6 text-left"
+          >
             <div className="flex items-center justify-between pb-4 border-b border-gray-100">
               <h3 className="text-base font-bold text-gray-900 flex items-center gap-2">
                 <SlidersHorizontal className="h-5 w-5 text-blue-600" />
@@ -303,7 +325,7 @@ const Cars = () => {
               </select>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Columns: Cars Grid & Sorting */}
           <div className="lg:col-span-3 space-y-6">
@@ -353,16 +375,20 @@ const Cars = () => {
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <motion.div 
+                initial="hidden" animate="visible" variants={staggerContainer}
+                className="grid grid-cols-1 md:grid-cols-2 gap-6"
+              >
                 {currentCars.map(car => (
-                  <CarCard
-                    key={car._id}
-                    car={car}
-                    isWishlisted={wishlistIds.includes(car._id)}
-                    onWishlistToggle={handleWishlistToggle}
-                  />
+                  <motion.div variants={slideUp} key={car._id}>
+                    <CarCard
+                      car={car}
+                      isWishlisted={wishlistIds.includes(car._id)}
+                      onWishlistToggle={handleWishlistToggle}
+                    />
+                  </motion.div>
                 ))}
-              </div>
+              </motion.div>
             )}
 
             {/* Pagination Controls */}

@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import Toast from '../components/Toast';
 import { Mail, Phone, Clock, MapPin, Send, MessageSquare } from 'lucide-react';
+
+const slideLeft = {
+  hidden: { opacity: 0, x: -30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+};
+
+const slideRight = {
+  hidden: { opacity: 0, x: 30 },
+  visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+};
 
 const Contact = () => {
   const [name, setName] = useState('');
@@ -30,7 +41,10 @@ const Contact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
 
           {/* Left Column: Details & Office Hours */}
-          <div className="lg:col-span-5 space-y-8">
+          <motion.div 
+            initial="hidden" animate="visible" variants={slideLeft}
+            className="lg:col-span-5 space-y-8"
+          >
             <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
               <h3 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3">Corporate Headquarters</h3>
 
@@ -92,10 +106,13 @@ const Contact = () => {
               </div>
             </div>
 
-          </div>
+          </motion.div>
 
           {/* Right Column: Premium Contact Form */}
-          <div className="lg:col-span-7">
+          <motion.div 
+            initial="hidden" animate="visible" variants={slideRight}
+            className="lg:col-span-7"
+          >
             <form onSubmit={handleSubmit} className="bg-white p-8 rounded-3xl border border-gray-100 shadow-sm space-y-6">
               <h3 className="text-lg font-bold text-gray-900">Send Us A Message</h3>
 
@@ -143,7 +160,7 @@ const Contact = () => {
                 Send Inquiry
               </button>
             </form>
-          </div>
+          </motion.div>
 
         </div>
 

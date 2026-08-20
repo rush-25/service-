@@ -1,5 +1,5 @@
-import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
@@ -54,10 +54,22 @@ const AdminRoute = ({ children }) => {
   return children;
 };
 
+// ScrollToTop Helper
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
+
 function App() {
   return (
     <div className="flex flex-col min-h-screen bg-gray-50">
-
+      <ScrollToTop />
+      
       {/* Dynamic Header */}
       <Navbar />
 

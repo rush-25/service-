@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../services/api';
 import CarCard from '../components/CarCard';
@@ -10,14 +11,28 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
+/* ── Animation Variants ────────────────────────────────── */
+const fadeIn = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
 /* ── Stat Counter ──────────────────────────────────────── */
 const StatItem = ({ value, label, suffix = '+' }) => (
-  <div className="stat-animate flex flex-col items-center py-8 px-6 border-r border-gray-200 last:border-r-0">
+  <motion.div variants={fadeIn} className="stat-animate flex flex-col items-center py-8 px-6 border-r border-gray-200 last:border-r-0">
     <span className="text-4xl font-extrabold text-blue-600 tracking-tight">
       {value}{suffix}
     </span>
     <span className="text-sm font-medium text-gray-500 mt-1">{label}</span>
-  </div>
+  </motion.div>
 );
 
 /* ── FAQ Item ──────────────────────────────────────────── */
@@ -46,7 +61,7 @@ const FaqItem = ({ question, answer, icon }) => {
 
 /* ── Service Card ──────────────────────────────────────── */
 const ServiceCard = ({ icon, title, description, accent }) => (
-  <div className={`service-card bg-white border border-gray-100 rounded-2xl p-6 flex flex-col gap-4`}>
+  <motion.div variants={fadeIn} className={`service-card bg-white border border-gray-100 rounded-2xl p-6 flex flex-col gap-4`}>
     <div className={`w-14 h-14 rounded-2xl flex items-center justify-center ${accent}`}>
       {icon}
     </div>
@@ -57,7 +72,7 @@ const ServiceCard = ({ icon, title, description, accent }) => (
     <Link to="/cars" className="mt-auto inline-flex items-center gap-1 text-xs font-bold text-blue-600 hover:gap-2 transition-all">
       Learn More <ArrowRight className="h-3.5 w-3.5" />
     </Link>
-  </div>
+  </motion.div>
 );
 
 /* ── Main Component ────────────────────────────────────── */
@@ -227,10 +242,13 @@ const Home = () => {
         <div className="absolute top-0 left-1/3 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
         <div className="absolute bottom-0 right-1/4 w-72 h-72 bg-indigo-600/15 rounded-full blur-3xl pointer-events-none"></div>
 
-        <div className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <motion.div 
+          initial="hidden" animate="visible" variants={staggerContainer}
+          className="max-w-7xl mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center"
+        >
 
           {/* Hero Left Content */}
-          <div className="lg:col-span-7 space-y-8 text-left">
+          <motion.div variants={fadeIn} className="lg:col-span-7 space-y-8 text-left">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-blue-500/10 border border-blue-500/20 backdrop-blur-sm rounded-full text-blue-400 text-xs font-semibold tracking-wider uppercase">
               ✨ Premium Car Rentals Redefined
             </div>
@@ -264,10 +282,10 @@ const Home = () => {
                 Our Services
               </a>
             </div>
-          </div>
+          </motion.div>
 
           {/* Hero Right: Booking Search Form Card */}
-          <div className="lg:col-span-5 bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 relative">
+          <motion.div variants={fadeIn} className="lg:col-span-5 bg-white rounded-3xl p-8 shadow-2xl border border-gray-100 relative">
             <div className="absolute -top-3 -right-3 bg-blue-600 text-white text-[10px] font-bold px-3 py-1 rounded-full shadow-lg shadow-blue-500/30 uppercase tracking-widest">
               Book Instantly
             </div>
@@ -348,19 +366,22 @@ const Home = () => {
                 Search Available Cars
               </button>
             </form>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
 
       {/* ── Animated Stats Bar ────────────────────────────── */}
       <div className="bg-white border-b border-gray-100 shadow-sm">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer}
+            className="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100"
+          >
             <StatItem value="200" label="Vehicles Available" />
             <StatItem value="5,000" label="Happy Customers" />
             <StatItem value="10" label="Pickup Locations" />
             <StatItem value="24/7" label="Customer Support" suffix="" />
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -372,16 +393,20 @@ const Home = () => {
           Handpicked luxury models tuned to deliver raw speed, comfort, and state of the art driver aids. Available immediately.
         </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+        <motion.div 
+          initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left"
+        >
           {popularCars.map(car => (
-            <CarCard
-              key={car._id}
-              car={car}
-              isWishlisted={wishlistIds.includes(car._id)}
-              onWishlistToggle={handleWishlistToggle}
-            />
+            <motion.div variants={fadeIn} key={car._id}>
+              <CarCard
+                car={car}
+                isWishlisted={wishlistIds.includes(car._id)}
+                onWishlistToggle={handleWishlistToggle}
+              />
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         <div className="mt-12">
           <Link
@@ -402,9 +427,12 @@ const Home = () => {
           <p className="text-gray-500 text-sm max-w-xl mx-auto mb-14">
             From a quick self-drive getaway to a full-service chauffeur experience — we have a solution for every journey.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left">
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 text-left"
+          >
             {services.map(s => <ServiceCard key={s.title} {...s} />)}
-          </div>
+          </motion.div>
         </div>
       </div>
 
@@ -414,8 +442,11 @@ const Home = () => {
           <span className="text-xs font-bold text-blue-600 uppercase tracking-widest font-sans">Why DriveEasy</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-16">Designed For Executive Renting</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
-            <div className="space-y-4">
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-3 gap-12 text-left"
+          >
+            <motion.div variants={fadeIn} className="space-y-4">
               <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl w-14 h-14 flex items-center justify-center shadow-inner">
                 <ShieldCheck className="h-7 w-7" />
               </div>
@@ -423,9 +454,9 @@ const Home = () => {
               <p className="text-gray-500 text-sm leading-relaxed">
                 Sleep easy knowing your dynamic trips are fully protected under complete liability waivers and multi-point secure assistance.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="space-y-4">
+            <motion.div variants={fadeIn} className="space-y-4">
               <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl w-14 h-14 flex items-center justify-center shadow-inner">
                 <Award className="h-7 w-7" />
               </div>
@@ -433,9 +464,9 @@ const Home = () => {
               <p className="text-gray-500 text-sm leading-relaxed">
                 Each luxury model is treated with active deep cleaning and detailing checks before key handover. Excellent condition is guaranteed.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="space-y-4">
+            <motion.div variants={fadeIn} className="space-y-4">
               <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl w-14 h-14 flex items-center justify-center shadow-inner">
                 <Zap className="h-7 w-7" />
               </div>
@@ -443,8 +474,8 @@ const Home = () => {
               <p className="text-gray-500 text-sm leading-relaxed">
                 Instantly map code accesses to retrieve vehicles at premium terminal locations. No queues, no hassle.
               </p>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
 
@@ -454,7 +485,10 @@ const Home = () => {
           <span className="text-xs font-bold text-blue-600 uppercase tracking-widest">Client Testimonials</span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-2 mb-16">What Our Customers Say</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+          <motion.div 
+            initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer}
+            className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left"
+          >
             {[
               {
                 stars: 5,
@@ -467,7 +501,7 @@ const Home = () => {
                 initials: 'SC', name: 'Sarah Connor', role: 'Corporate account manager',
               },
             ].map(t => (
-              <div key={t.name} className="card-lift bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-sm relative space-y-6">
+              <motion.div variants={fadeIn} key={t.name} className="card-lift bg-gray-50 p-8 rounded-3xl border border-gray-100 shadow-sm relative space-y-6">
                 <div className="flex gap-1">
                   {[...Array(t.stars)].map((_, i) => <Star key={i} className="h-5 w-5 text-amber-400 fill-amber-400" />)}
                 </div>
@@ -481,9 +515,9 @@ const Home = () => {
                     <p className="text-xs text-gray-400 font-medium">{t.role}</p>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
 
