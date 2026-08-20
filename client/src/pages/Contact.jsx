@@ -65,7 +65,10 @@ const Contact = () => {
                   </div>
                   <div>
                     <h5 className="font-bold text-gray-900 text-sm">Direct Phone</h5>
-                    <p className="text-xs text-gray-400 mt-0.5">077-3511935, 077-8119501</p>
+                    <div className="text-xs text-gray-400 mt-0.5 space-y-1">
+                      <p>+94773535282</p>
+                      <p>+94773511935</p>
+                    </div>
                   </div>
                 </div>
 

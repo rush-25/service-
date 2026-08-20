@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Heart, Star, Disc, Settings, Users, ChevronRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
-const WHATSAPP_NUMBER = '94773511935'; // Update this to your actual WhatsApp number
+const WHATSAPP_NUMBER = '94773535282'; // Update this to your actual WhatsApp number
 
 const CarCard = ({ car, isWishlisted, onWishlistToggle }) => {
   const { user } = useAuth();

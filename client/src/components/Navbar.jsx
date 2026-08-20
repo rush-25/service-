@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation as useRouteLocation } from 'react-router
 import { useAuth } from '../context/AuthContext';
 import { Menu, X, Car, User, LogOut } from 'lucide-react';
 
-const WHATSAPP_NUMBER = '94773511935';
+const WHATSAPP_NUMBER = '94773535282';
 
 const Navbar = () => {
   const { user, logout } = useAuth();

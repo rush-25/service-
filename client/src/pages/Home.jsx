@@ -555,7 +555,7 @@ const Home = () => {
               <ArrowRight className="h-4 w-4" />
             </Link>
             <a
-              href={`https://wa.me/94773511935?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20a%20car%20rental.`}
+              href={`https://wa.me/94773535282?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20a%20car%20rental.`}
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-2 px-10 h-14 text-sm font-bold text-white bg-white/10 hover:bg-white/20 border border-white/30 rounded-2xl transition-all hover:-translate-y-0.5 cursor-pointer"

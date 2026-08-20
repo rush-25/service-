@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Car, Mail, Phone, MapPin, Clock, ShieldCheck, Send } from 'lucide-react';
 
-const WHATSAPP_NUMBER = '94773511935';
+const WHATSAPP_NUMBER = '94773535282';
 
 const Footer = () => {
   const [email, setEmail] = useState('');
@@ -114,9 +114,12 @@ const Footer = () => {
                 <MapPin className="h-5 w-5 text-blue-500 shrink-0" />
                 <span>Colombo Rd, Maikkulama, Chilaw</span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-blue-500 shrink-0" />
-                <span>077-3511935, 077-8119501</span>
+              <li className="flex items-start gap-3">
+                <Phone className="h-5 w-5 text-blue-500 shrink-0 mt-0.5" />
+                <div className="flex flex-col space-y-1">
+                  <span>+94773535282</span>
+                  <span>+94773511935</span>
+                </div>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="h-5 w-5 text-blue-500 shrink-0" />
