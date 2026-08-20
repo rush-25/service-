@@ -109,36 +109,26 @@ const About = () => {
 
           <motion.div 
             initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-50px" }} variants={staggerContainer}
-            className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left"
+            className="grid grid-cols-1 md:grid-cols-2 gap-12 text-left max-w-4xl mx-auto"
           >
 
             <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 p-6 space-y-4 shadow-sm">
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=400&q=80" alt="CEO" className="w-full h-full object-cover" />
+              <div className="aspect-[3/4] bg-gray-100 rounded-2xl overflow-hidden">
+                <img src="/team/founder.jpg" alt="Founder & Owner" className="w-full h-full object-cover" />
               </div>
-              <div>
-                <h4 className="text-base font-bold text-gray-900">Alexander Thorne</h4>
-                <p className="text-xs font-semibold text-blue-600">Chief Executive Officer</p>
-              </div>
-            </motion.div>
-
-            <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 p-6 space-y-4 shadow-sm">
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80" alt="COO" className="w-full h-full object-cover" />
-              </div>
-              <div>
-                <h4 className="text-base font-bold text-gray-900">Victoria Sterling</h4>
-                <p className="text-xs font-semibold text-blue-600">Chief Operations Officer</p>
+              <div className="text-center">
+                <h4 className="text-xl font-bold text-gray-900">Founder & Owner</h4>
+                <p className="text-sm font-semibold text-blue-600 mt-1">DriveEasy / Indika Motors</p>
               </div>
             </motion.div>
 
             <motion.div variants={slideUp} className="bg-white rounded-3xl border border-gray-100 p-6 space-y-4 shadow-sm">
-              <div className="aspect-square bg-gray-100 rounded-2xl overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=400&q=80" alt="VP Sales" className="w-full h-full object-cover" />
+              <div className="aspect-[3/4] bg-gray-100 rounded-2xl overflow-hidden">
+                <img src="/team/director.jpg" alt="Managing Director" className="w-full h-full object-cover" />
               </div>
-              <div>
-                <h4 className="text-base font-bold text-gray-900">Marcus Vance</h4>
-                <p className="text-xs font-semibold text-blue-600">VP of Fleet Experience</p>
+              <div className="text-center">
+                <h4 className="text-xl font-bold text-gray-900">Managing Director</h4>
+                <p className="text-sm font-semibold text-blue-600 mt-1">Operations</p>
               </div>
             </motion.div>
 
