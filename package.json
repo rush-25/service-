@@ -1,12 +1,14 @@
 {
-  "name": "app",
+  "name": "driveeasy-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "REST API for the DriveEasy car rental platform",
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",
     "dev": "node server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "seed": "node server/utils/runSeed.js",
+    "test": "jest --detectOpenHandles --forceExit",
+    "test:watch": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -25,9 +27,15 @@
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
+    "express-rate-limit": "^8.6.2",
+    "helmet": "^8.3.0",
     "jsonwebtoken": "^9.0.3",
     "mongodb-memory-server": "^11.2.0",
     "mongoose": "^9.7.4",
     "multer": "^2.2.0"
+  },
+  "devDependencies": {
+    "jest": "^30.4.2",
+    "supertest": "^7.2.2"
   }
 }

@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import api from '../services/api';
+import { getProfile, loginUser, registerUser, updateProfileData } from '../services/authService';
 
 const AuthContext = createContext(null);
 
@@ -13,7 +14,7 @@ export const AuthProvider = ({ children }) => {
       if (token) {
         try {
           api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          const res = await api.get('/auth/profile');
+          const res = await getProfile();
           if (res.data.success) {
             setUser(res.data.user);
             localStorage.setItem('user', JSON.stringify(res.data.user));
@@ -33,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await api.post('/auth/login', { email, password });
+      const res = await loginUser({ email, password });
       if (res.data.success) {
         setToken(res.data.token);
         setUser(res.data.user);
@@ -52,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, phone, password) => {
     try {
-      const res = await api.post('/auth/register', { name, email, phone, password });
+      const res = await registerUser({ name, email, phone, password });
       if (res.data.success) {
         setToken(res.data.token);
         setUser(res.data.user);
@@ -79,7 +80,7 @@ export const AuthProvider = ({ children }) => {
 
   const updateProfile = async (data) => {
     try {
-      const res = await api.put('/auth/profile', data);
+      const res = await updateProfileData(data);
       if (res.data.success) {
         setUser(res.data.user);
         localStorage.setItem('user', JSON.stringify(res.data.user));

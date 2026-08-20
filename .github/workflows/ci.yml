@@ -1,0 +1,42 @@
+name: DriveEasy CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+
+    - name: Install Root/Backend Dependencies
+      run: npm ci
+
+    - name: Run Backend Tests
+      run: npm test
+
+    - name: Install Frontend Dependencies
+      working-directory: ./client
+      run: npm ci
+
+    - name: Lint Frontend
+      working-directory: ./client
+      run: npm run lint
+
+    - name: Build Frontend
+      working-directory: ./client
+      run: npm run build
